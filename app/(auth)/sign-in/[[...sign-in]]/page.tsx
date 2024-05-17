@@ -1,7 +1,34 @@
-import { SignIn } from "@clerk/nextjs";
+import { SignIn, ClerkLoaded, ClerkLoading } from "@clerk/nextjs";
+import { Loader2 } from "lucide-react";
+import Image from "next/image";
 
 const SignInPage = () => {
-  return <SignIn path="/sign-in" />;
+  return (
+    <div className="min-h-screen grid grid-cols-1 lg:grid-cols-2">
+      <div className="h-full flex flex-col items-center justify-center px-4">
+        <div className="text-center space-y-4 pt-10 pb-2">
+          <h1 className="font-bold text-3xl text-[#2E2A47]">Welcome Back!</h1>
+          <p className="text-base text-[#7E8CA0]">
+            Log in or Create account to get back to your dashboard!
+          </p>
+        </div>
+        <ClerkLoaded>
+          <SignIn path="/sign-in" />
+        </ClerkLoaded>
+        <ClerkLoading>
+          <Loader2 className="animate-spin text-muted-foreground" size={30} />
+        </ClerkLoading>
+      </div>
+      <div className="h-full hidden lg:flex items-center justify-center">
+        <Image
+          src="/personalfinancelogo.svg"
+          height={100}
+          width={500}
+          alt="Personal finance"
+        />
+      </div>
+    </div>
+  );
 };
 
 export default SignInPage;
