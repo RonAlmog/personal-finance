@@ -9,7 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@clerk/backend": "^1.1.5",
     "@clerk/nextjs": "^5.0.11",
+    "@hono/clerk-auth": "^2.0.0",
+    "@hono/zod-validator": "^0.2.1",
     "@hookform/resolvers": "^3.4.0",
     "@radix-ui/react-checkbox": "^1.0.4",
     "@radix-ui/react-dialog": "^1.0.5",
