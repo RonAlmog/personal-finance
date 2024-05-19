@@ -40,7 +40,7 @@ const Navigation = () => {
     router.push(href);
     setIsOpen(false);
   };
-  console.log({ isMobile });
+
   if (isMobile) {
     return (
       <Sheet open={isOpen} onOpenChange={setIsOpen}>
@@ -59,6 +59,7 @@ const Navigation = () => {
                   variant={route.href === pathname ? "secondary" : "ghost"}
                   key={route.href}
                   onClick={() => onClick(route.href)}
+                  className="w-full justify-start"
                 >
                   {route.label}
                 </Button>
