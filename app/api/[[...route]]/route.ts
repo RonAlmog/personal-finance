@@ -15,13 +15,13 @@ const app = new Hono().basePath("/api");
 // app.route("/books", books);
 // app.route("/accounts", accounts);
 
-app.onError((err, c) => {
-  if (err instanceof HTTPException) {
-    return err.getResponse();
-  }
+// app.onError((err, c) => {
+//   if (err instanceof HTTPException) {
+//     return err.getResponse();
+//   }
 
-  return c.json({ error: "Internal server error" }, 500);
-});
+//   return c.json({ error: "Internal server error" }, 500);
+// });
 
 // with rpc
 const routes = app
