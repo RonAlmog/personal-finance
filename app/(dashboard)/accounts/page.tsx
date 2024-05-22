@@ -13,6 +13,12 @@ const data: Payment[] = [
     status: "pending",
     email: "m@example.com",
   },
+  {
+    id: "728ed52f",
+    amount: 102,
+    status: "processing",
+    email: "masdfadfs@example.com",
+  },
   // ...
 ];
 
