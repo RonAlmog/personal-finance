@@ -8,16 +8,19 @@ import { DataTable } from "@/components/data-table";
 import { useGetAccounts } from "@/features/accounts/api/use-get-accounts";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useBulkDeleteAccounts } from "@/features/accounts/api/use-bulk-delete";
+import { useNewCategory } from "@/features/categories/hooks/use-new-category";
+import { useBulkDeleteCategories } from "@/features/categories/api/use-bulk-delete-categories";
+import { useGetCategories } from "@/features/categories/api/use-get-categories";
 
 const CategoriesPage = () => {
-  const newAccount = useNewAccount();
-  const deleteAccounts = useBulkDeleteAccounts();
-  const accountsQuery = useGetAccounts();
-  const accounts = accountsQuery.data || [];
+  const newCategory = useNewCategory();
+  const deleteCategories = useBulkDeleteCategories();
+  const categoriesQuery = useGetCategories();
+  const categories = categoriesQuery.data || [];
 
-  const isDisabled = deleteAccounts.isPending || accountsQuery.isLoading;
+  const isDisabled = deleteCategories.isPending || categoriesQuery.isLoading;
 
-  if (accountsQuery.isLoading) {
+  if (categoriesQuery.isLoading) {
     return (
       <div className="max-w-screen-2xl mx-auto w-full pb-10 -mt-24">
         <Card className="border-none drop-shadow-sm">
@@ -38,7 +41,7 @@ const CategoriesPage = () => {
       <Card className="border-none drop-shadow-sm">
         <CardHeader className="gap-y-2 lg:flex-row lg:items-center lg: justify-between">
           <CardTitle className="text-xl line-clamp-1">Categories</CardTitle>
-          <Button size="sm" onClick={newAccount.onOpen}>
+          <Button size="sm" onClick={newCategory.onOpen}>
             <Plus className="size-4 mr-2" />
             Add New
           </Button>
@@ -46,11 +49,11 @@ const CategoriesPage = () => {
         <CardContent>
           <DataTable
             columns={columns}
-            data={accounts}
+            data={categories}
             filterKey="name"
             onDelete={(row) => {
               const ids = row.map((r) => r.original.id);
-              deleteAccounts.mutate({ ids });
+              deleteCategories.mutate({ ids });
               return null;
             }}
             disabled={isDisabled}

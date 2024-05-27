@@ -10,7 +10,7 @@ import Actions from "./actions";
 
 // the 200 means, take the part of the response that is valid only.
 export type ResponseType = InferResponseType<
-  typeof client.api.accounts.$get,
+  typeof client.api.categories.$get,
   200
 >["data"][0];
 
