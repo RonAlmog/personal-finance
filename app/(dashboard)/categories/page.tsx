@@ -1,13 +1,10 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { useNewAccount } from "@/features/accounts/hooks/use-new-account";
 import { Loader2, Plus } from "lucide-react";
 import { columns } from "./columns";
 import { DataTable } from "@/components/data-table";
-import { useGetAccounts } from "@/features/accounts/api/use-get-accounts";
 import { Skeleton } from "@/components/ui/skeleton";
-import { useBulkDeleteAccounts } from "@/features/accounts/api/use-bulk-delete";
 import { useNewCategory } from "@/features/categories/hooks/use-new-category";
 import { useBulkDeleteCategories } from "@/features/categories/api/use-bulk-delete-categories";
 import { useGetCategories } from "@/features/categories/api/use-get-categories";
