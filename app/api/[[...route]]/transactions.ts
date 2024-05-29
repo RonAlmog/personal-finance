@@ -7,7 +7,7 @@ import {
   accounts,
 } from "@/db/schema";
 import { clerkMiddleware, getAuth } from "@hono/clerk-auth";
-import { and, desc, eq, gte, inArray, lte } from "drizzle-orm";
+import { and, desc, eq, gte, inArray, lte, sql } from "drizzle-orm";
 import { Hono } from "hono";
 import { zValidator } from "@hono/zod-validator";
 import { createId } from "@paralleldrive/cuid2";
@@ -115,7 +115,7 @@ const app = new Hono()
     "/",
     clerkMiddleware(),
     // use the categories schema, but only use specific fields
-    zValidator("json", insertCategorySchema.pick({ name: true })),
+    zValidator("json", insertTransactionSchema.omit({ id: true })),
     async (c) => {
       const values = c.req.valid("json"); // values is typed!
       const auth = getAuth(c);
@@ -124,10 +124,9 @@ const app = new Hono()
       }
 
       const data = await db
-        .insert(categories)
+        .insert(transactions)
         .values({
           id: createId(),
-          userId: auth.userId,
           ...values,
         })
         // unless you use returning(), nothing will come back
@@ -152,16 +151,31 @@ const app = new Hono()
       if (!auth?.userId) {
         return c.json({ error: "Unauthorized" }, 401);
       }
+      // get a list of transactions to delete (with proper validation)
+      const transactionsToDelete = db.$with("transactions_to_delete").as(
+        db
+          .select({ id: transactions.id })
+          .from(transactions)
+          .innerJoin(accounts, eq(transactions.accountId, accounts.id))
+          .where(
+            and(
+              inArray(transactions.id, values.ids),
+              eq(accounts.userId, auth.userId)
+            )
+          )
+      );
+      // then delete them
       const data = await db
-        .delete(categories)
+        .with(transactionsToDelete)
+        .delete(transactions)
         .where(
-          and(
-            eq(categories.userId, auth.userId),
-            inArray(categories.id, values.ids)
+          inArray(
+            transactions.id,
+            sql`(select id from ${transactionsToDelete})`
           )
         )
         .returning({
-          id: categories.id,
+          id: transactions.id,
         });
 
       return c.json({ data });
