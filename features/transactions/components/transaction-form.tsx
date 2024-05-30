@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import Select from "@/components/select";
 
 const formSchema = z.object({
   date: z.coerce.date(),
@@ -55,7 +56,8 @@ const TransactionForm = ({
   });
 
   const handleSubmit = (values: FormValues) => {
-    onSubmit(values);
+    console.log(values);
+    //onSubmit(values);
   };
 
   const handleDelete = () => {
@@ -69,21 +71,45 @@ const TransactionForm = ({
         className="space-y-4 pt-4"
       >
         <FormField
-          name="name"
+          name="accountId"
           control={form.control}
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Name</FormLabel>
+              <FormLabel>Account</FormLabel>
               <FormControl>
-                <Input
+                <Select
+                  placeholder="Select account"
+                  options={accountOptions}
+                  onCreate={onCreateAccount}
+                  onChange={field.onChange}
+                  value={field.value}
                   disabled={disabled}
-                  placeholder="e.g. Cash, Bank, Credit Card"
-                  {...field}
                 />
               </FormControl>
             </FormItem>
           )}
         />
+
+        <FormField
+          name="categoryId"
+          control={form.control}
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Category</FormLabel>
+              <FormControl>
+                <Select
+                  placeholder="Select category"
+                  options={categoryOptions}
+                  onCreate={onCreateCategory}
+                  onChange={field.onChange}
+                  value={field.value}
+                  disabled={disabled}
+                />
+              </FormControl>
+            </FormItem>
+          )}
+        />
+
         <Button className="w-full" disabled={disabled}>
           {id ? "Save changes" : "Create Account"}
         </Button>
