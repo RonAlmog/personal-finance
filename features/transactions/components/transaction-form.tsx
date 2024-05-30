@@ -14,6 +14,8 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Select from "@/components/select";
 import DatePicker from "@/components/date-picker";
+import { Textarea } from "@/components/ui/textarea";
+import AmountInput from "@/components/amount-input";
 
 const formSchema = z.object({
   date: z.coerce.date(),
@@ -121,6 +123,58 @@ const TransactionForm = ({
                   onCreate={onCreateCategory}
                   onChange={field.onChange}
                   value={field.value}
+                  disabled={disabled}
+                />
+              </FormControl>
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          name="payee"
+          control={form.control}
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Payee</FormLabel>
+              <FormControl>
+                <Input
+                  placeholder="Add a Payee"
+                  disabled={disabled}
+                  {...field}
+                />
+              </FormControl>
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          name="amount"
+          control={form.control}
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Amount</FormLabel>
+              <FormControl>
+                <AmountInput
+                  disabled={disabled}
+                  placeholder="0.00"
+                  {...field}
+                />
+              </FormControl>
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          name="notes"
+          control={form.control}
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Notes</FormLabel>
+              <FormControl>
+                <Textarea
+                  {...field}
+                  value={field.value ?? ""}
+                  placeholder="Optional notes"
                   disabled={disabled}
                 />
               </FormControl>
