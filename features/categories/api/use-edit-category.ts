@@ -24,8 +24,9 @@ export const useEditCategory = (id?: string) => {
     onSuccess: () => {
       toast.success("Category updated");
       // this will cause a refetch of all places with query key.
-      queryClient.invalidateQueries({ queryKey: ["categories", { id }] });
+      queryClient.invalidateQueries({ queryKey: ["category", { id }] });
       queryClient.invalidateQueries({ queryKey: ["categories"] });
+      queryClient.invalidateQueries({ queryKey: ["transactions"] });
       // todo: invalidate summary, trans
     },
     onError: () => {

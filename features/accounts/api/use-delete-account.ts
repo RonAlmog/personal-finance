@@ -22,6 +22,7 @@ export const useDeleteAccount = (id?: string) => {
       // this will cause a refetch of all places with query key.
       queryClient.invalidateQueries({ queryKey: ["account", { id }] });
       queryClient.invalidateQueries({ queryKey: ["accounts"] });
+      queryClient.invalidateQueries({ queryKey: ["transactions"] });
       // todo: invalidate summary, trans
     },
     onError: () => {
