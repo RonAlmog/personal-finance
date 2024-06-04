@@ -34,7 +34,7 @@ const Actions = ({ id }: Props) => {
     <>
       <ConfirmDialog />
       <DropdownMenu>
-        <DropdownMenuTrigger>
+        <DropdownMenuTrigger asChild>
           <Button variant="ghost" className="size-8 p-0">
             <MoreHorizontal className="size-4" />
           </Button>
