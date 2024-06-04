@@ -77,6 +77,17 @@ const ImportCard = ({ data, onCancel, onSubmit }: Props) => {
         .filter((row) => row.length > 0),
     };
     console.log({ mappedData });
+    const arrayOfData = mappedData.body.map((row) => {
+      return row.reduce((acc: any, cell, index) => {
+        const header = mappedData.headers[index];
+        if (header !== null) {
+          acc[header] = cell;
+        }
+
+        return acc;
+      }, {});
+    });
+    console.log({ arrayOfData });
   };
   return (
     <div className="max-w-screen-2xl mx-auto w-full pb-10 -mt-24">
