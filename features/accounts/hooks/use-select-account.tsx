@@ -51,7 +51,7 @@ export const useSelectAccount = (): [
     handleClose();
   };
 
-  const ConfirmDialog = () => (
+  const AccountDialog = () => (
     <Dialog open={promise != null}>
       <DialogContent>
         <DialogHeader>
@@ -77,5 +77,5 @@ export const useSelectAccount = (): [
     </Dialog>
   );
 
-  return [ConfirmDialog, confirm];
+  return [AccountDialog, confirm];
 };
