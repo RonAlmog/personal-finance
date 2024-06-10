@@ -8,6 +8,7 @@ import {
 } from "./ui/card";
 import AreaVariant from "./area-variant";
 import BarVariant from "./bar-variant";
+import LineVariant from "./line-variant";
 
 type Props = {
   data?: {
@@ -34,7 +35,8 @@ const Chart = ({ data = [] }: Props) => {
           </div>
         ) : (
           //   <AreaVariant data={data} />
-          <BarVariant data={data} />
+          //   <BarVariant data={data} />
+          <LineVariant data={data} />
         )}
       </CardContent>
     </Card>
