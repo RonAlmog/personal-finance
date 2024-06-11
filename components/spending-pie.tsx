@@ -13,6 +13,7 @@ import BarVariant from "./bar-variant";
 import { useState } from "react";
 import { SelectContent, SelectGroup } from "@radix-ui/react-select";
 import PieVariang from "./pie-variant";
+import RadarVariant from "./radar-variant";
 
 type Props = {
   data?: {
@@ -73,8 +74,7 @@ const SpendingPie = ({ data = [] }: Props) => {
         ) : (
           <>
             {chartType === "pie" && <PieVariang data={data} />}
-            {/* {chartType === "radar" && <BarVariant data={data} />}
-            {chartType === "radial" && <LineVariant data={data} />} */}
+            {chartType === "radar" && <RadarVariant data={data} />}
           </>
         )}
       </CardContent>
