@@ -18,7 +18,6 @@ type Props = {
 };
 
 const AreaVariant = ({ data }: Props) => {
-  console.log({ data });
   return (
     <ResponsiveContainer width="100%" height={350}>
       <AreaChart data={data}>

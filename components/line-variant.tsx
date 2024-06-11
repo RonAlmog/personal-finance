@@ -18,7 +18,6 @@ type Props = {
 };
 
 const LineVariant = ({ data }: Props) => {
-  console.log({ data });
   return (
     <ResponsiveContainer width="100%" height={350}>
       <LineChart data={data}>

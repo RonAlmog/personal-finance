@@ -18,7 +18,6 @@ type Props = {
 };
 
 const BarVariant = ({ data }: Props) => {
-  console.log({ data });
   return (
     <ResponsiveContainer width="100%" height={350}>
       <BarChart data={data}>
