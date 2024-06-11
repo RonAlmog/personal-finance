@@ -1,7 +1,15 @@
 import { formatPercentage } from "@/lib/utils";
 import { format } from "date-fns";
 import { Ultra } from "next/font/google";
-import { Cell, Legend, Pie, PieChart, ResponsiveContainer } from "recharts";
+import {
+  Cell,
+  Legend,
+  Pie,
+  PieChart,
+  ResponsiveContainer,
+  Tooltip,
+} from "recharts";
+import CategoryTooltip from "./category-tooltip copy";
 
 const COLORS = ["#0062FF", "#12C6FF", "#FF647F", "#FF9354"];
 
@@ -47,6 +55,7 @@ const PieVariang = ({ data }: Props) => {
             );
           }}
         />
+        <Tooltip content={<CategoryTooltip />} />
         <Pie
           data={data}
           cx="50%"
