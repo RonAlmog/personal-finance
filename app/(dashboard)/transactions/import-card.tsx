@@ -78,7 +78,7 @@ const ImportCard = ({ data, onCancel, onSubmit }: Props) => {
         })
         .filter((row) => row.length > 0),
     };
-    console.log({ mappedData });
+
     const arrayOfData = mappedData.body.map((row) => {
       return row.reduce((acc: any, cell, index) => {
         const header = mappedData.headers[index];
@@ -95,7 +95,7 @@ const ImportCard = ({ data, onCancel, onSubmit }: Props) => {
       amount: convertAmountToMiliunits(parseFloat(item.amount)),
       date: format(parse(item.date, dateFormat, new Date()), outputFormat),
     }));
-    console.log({ formattedData });
+    // console.log({ formattedData });
 
     onSubmit(formattedData);
   };

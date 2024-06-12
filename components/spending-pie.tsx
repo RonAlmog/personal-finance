@@ -8,12 +8,11 @@ import {
 } from "./ui/card";
 import { Select, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
 
-import BarVariant from "./bar-variant";
-
 import { useState } from "react";
-import { SelectContent, SelectGroup } from "@radix-ui/react-select";
-import PieVariang from "./pie-variant";
+import { SelectContent } from "@radix-ui/react-select";
+import PieVariant from "./pie-variant";
 import RadarVariant from "./radar-variant";
+import RadialVariant from "./radial-variant";
 
 type Props = {
   data?: {
@@ -24,7 +23,6 @@ type Props = {
 
 const SpendingPie = ({ data = [] }: Props) => {
   const [chartType, setChartType] = useState("pie");
-  console.log({ data });
 
   const onTypeChange = (type: string) => {
     // todo: add paywall
@@ -73,8 +71,9 @@ const SpendingPie = ({ data = [] }: Props) => {
           </div>
         ) : (
           <>
-            {chartType === "pie" && <PieVariang data={data} />}
+            {chartType === "pie" && <PieVariant data={data} />}
             {chartType === "radar" && <RadarVariant data={data} />}
+            {chartType === "radial" && <RadialVariant data={data} />}
           </>
         )}
       </CardContent>
