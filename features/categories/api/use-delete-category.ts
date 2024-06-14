@@ -22,7 +22,7 @@ export const useDeleteCategory = (id?: string) => {
       // this will cause a refetch of all places with query key.
       queryClient.invalidateQueries({ queryKey: ["categories", { id }] });
       queryClient.invalidateQueries({ queryKey: ["categories"] });
-      // todo: invalidate summary, trans
+      queryClient.invalidateQueries({ queryKey: ["summary"] });
     },
     onError: () => {
       toast.error("Failed to delete category");
